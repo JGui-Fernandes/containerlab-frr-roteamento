@@ -5,6 +5,7 @@ topology:
     r1:
       kind: linux
       image: frrouting/frr:latest
+      privileged: true
       binds:
         - configs/r1/daemons:/etc/frr/daemons
         - configs/r1/frr.conf:/etc/frr/frr.conf
@@ -26,6 +27,7 @@ topology:
     r2:
       kind: linux
       image: frrouting/frr:latest
+      privileged: true
       binds:
         - configs/r2/daemons:/etc/frr/daemons
         - configs/r2/frr.conf:/etc/frr/frr.conf
@@ -45,6 +47,7 @@ topology:
     r3:
       kind: linux
       image: frrouting/frr:latest
+      privileged: true
       binds:
         - configs/r3/daemons:/etc/frr/daemons
         - configs/r3/frr.conf:/etc/frr/frr.conf
@@ -64,6 +67,7 @@ topology:
     r4:
       kind: linux
       image: frrouting/frr:latest
+      privileged: true
       binds:
         - configs/r4/daemons:/etc/frr/daemons
         - configs/r4/frr.conf:/etc/frr/frr.conf
@@ -83,6 +87,7 @@ topology:
     r5:
       kind: linux
       image: frrouting/frr:latest
+      privileged: true
       binds:
         - configs/r5/daemons:/etc/frr/daemons
         - configs/r5/frr.conf:/etc/frr/frr.conf

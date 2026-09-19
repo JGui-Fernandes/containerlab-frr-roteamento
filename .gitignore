@@ -1,2 +1,4 @@
 clab-*/
 *.pcap
+*.pcapng
+*.log

@@ -2,3 +2,4 @@ clab-*/
 *.pcap
 *.pcapng
 *.log
+*.pkt

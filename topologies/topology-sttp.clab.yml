@@ -1,0 +1,161 @@
+name: lab1-sttp
+
+topology:
+  nodes:
+    r1:
+      kind: linux
+      image: frrouting/frr:latest
+      privileged: true
+      binds:
+        - configs/sttp/r1/daemons:/etc/frr/daemons
+        - configs/sttp/r1/frr.conf:/etc/frr/frr.conf
+        - configs/common/vtysh.conf:/etc/frr/vtysh.conf
+      sysctls:
+        net.ipv4.ip_forward: 1
+        net.ipv4.conf.all.rp_filter: 0
+        net.ipv4.conf.default.rp_filter: 0
+      exec:
+        - ip link set eth1 up
+        - ip addr add 10.0.12.1/30 dev eth1
+        - ip link set eth2 up
+        - ip addr add 10.0.13.1/30 dev eth2
+        - ip link set eth3 up
+        - ip addr add 10.0.15.1/30 dev eth3
+        - ip link set eth4 up
+        - ip addr add 192.168.1.1/24 dev eth4
+
+    r2:
+      kind: linux
+      image: frrouting/frr:latest
+      privileged: true
+      binds:
+        - configs/sttp/r2/daemons:/etc/frr/daemons
+        - configs/sttp/r2/frr.conf:/etc/frr/frr.conf
+        - configs/common/vtysh.conf:/etc/frr/vtysh.conf
+      sysctls:
+        net.ipv4.ip_forward: 1
+        net.ipv4.conf.all.rp_filter: 0
+        net.ipv4.conf.default.rp_filter: 0
+      exec:
+        - ip link set eth1 up
+        - ip addr add 10.0.12.2/30 dev eth1
+        - ip link set eth2 up
+        - ip addr add 10.0.25.1/30 dev eth2
+        - ip link set eth3 up
+        - ip addr add 192.168.2.1/24 dev eth3
+
+    r3:
+      kind: linux
+      image: frrouting/frr:latest
+      privileged: true
+      binds:
+        - configs/sttp/r3/daemons:/etc/frr/daemons
+        - configs/sttp/r3/frr.conf:/etc/frr/frr.conf
+        - configs/common/vtysh.conf:/etc/frr/vtysh.conf
+      sysctls:
+        net.ipv4.ip_forward: 1
+        net.ipv4.conf.all.rp_filter: 0
+        net.ipv4.conf.default.rp_filter: 0
+      exec:
+        - ip link set eth1 up
+        - ip addr add 10.0.13.2/30 dev eth1
+        - ip link set eth2 up
+        - ip addr add 10.0.34.1/30 dev eth2
+        - ip link set eth3 up
+        - ip addr add 192.168.3.1/24 dev eth3
+
+    r4:
+      kind: linux
+      image: frrouting/frr:latest
+      privileged: true
+      binds:
+        - configs/sttp/r4/daemons:/etc/frr/daemons
+        - configs/sttp/r4/frr.conf:/etc/frr/frr.conf
+        - configs/common/vtysh.conf:/etc/frr/vtysh.conf
+      sysctls:
+        net.ipv4.ip_forward: 1
+        net.ipv4.conf.all.rp_filter: 0
+        net.ipv4.conf.default.rp_filter: 0
+      exec:
+        - ip link set eth1 up
+        - ip addr add 10.0.34.2/30 dev eth1
+        - ip link set eth2 up
+        - ip addr add 10.0.45.1/30 dev eth2
+        - ip link set eth3 up
+        - ip addr add 192.168.4.1/24 dev eth3
+
+    r5:
+      kind: linux
+      image: frrouting/frr:latest
+      privileged: true
+      binds:
+        - configs/sttp/r5/daemons:/etc/frr/daemons
+        - configs/sttp/r5/frr.conf:/etc/frr/frr.conf
+        - configs/common/vtysh.conf:/etc/frr/vtysh.conf
+      sysctls:
+        net.ipv4.ip_forward: 1
+        net.ipv4.conf.all.rp_filter: 0
+        net.ipv4.conf.default.rp_filter: 0
+      exec:
+        - ip link set eth1 up
+        - ip addr add 10.0.15.2/30 dev eth1
+        - ip link set eth2 up
+        - ip addr add 10.0.25.2/30 dev eth2
+        - ip link set eth3 up
+        - ip addr add 10.0.45.2/30 dev eth3
+        - ip link set eth4 up
+        - ip addr add 192.168.5.1/24 dev eth4
+
+    h1:
+      kind: linux
+      image: alpine:latest
+      exec:
+        - ip link set eth1 up
+        - ip addr add 192.168.1.10/24 dev eth1
+        - ip route replace default via 192.168.1.1
+
+    h2:
+      kind: linux
+      image: alpine:latest
+      exec:
+        - ip link set eth1 up
+        - ip addr add 192.168.2.10/24 dev eth1
+        - ip route replace default via 192.168.2.1
+
+    h3:
+      kind: linux
+      image: alpine:latest
+      exec:
+        - ip link set eth1 up
+        - ip addr add 192.168.3.10/24 dev eth1
+        - ip route replace default via 192.168.3.1
+
+    h4:
+      kind: linux
+      image: alpine:latest
+      exec:
+        - ip link set eth1 up
+        - ip addr add 192.168.4.10/24 dev eth1
+        - ip route replace default via 192.168.4.1
+
+    h5:
+      kind: linux
+      image: alpine:latest
+      exec:
+        - ip link set eth1 up
+        - ip addr add 192.168.5.10/24 dev eth1
+        - ip route replace default via 192.168.5.1
+
+  links:
+    - endpoints: ["r1:eth1", "r2:eth1"]
+    - endpoints: ["r1:eth2", "r3:eth1"]
+    - endpoints: ["r1:eth3", "r5:eth1"]
+    - endpoints: ["r2:eth2", "r5:eth2"]
+    - endpoints: ["r3:eth2", "r4:eth1"]
+    - endpoints: ["r4:eth2", "r5:eth3"]
+
+    - endpoints: ["r1:eth4", "h1:eth1"]
+    - endpoints: ["r2:eth3", "h2:eth1"]
+    - endpoints: ["r3:eth3", "h3:eth1"]
+    - endpoints: ["r4:eth3", "h4:eth1"]
+    - endpoints: ["r5:eth4", "h5:eth1"]

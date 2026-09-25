@@ -3,3 +3,10 @@ clab-*/
 *.pcapng
 *.log
 *.pkt
+
+*.pcapng
+results/**/pcaps/
+.vscode/
+__pycache__/
+*.pyc
+.venv/

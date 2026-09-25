@@ -17,7 +17,7 @@ import os
 from heapq import heappush, heappop
 
 PING_AVG_RE = re.compile(
-    r"(?:rtt|round-trip).* = [0-9.]+/([0-9.]+)/[0-9.]+/[0-9.]+ ms"
+    r"(?:rtt|round-trip).* = [0-9.]+/([0-9.]+)/[0-9.]+(?:/[0-9.]+)? ms"
 )
 
 # ----------------------------
@@ -34,14 +34,12 @@ def docker_exec(container, argv):
 # Medição (RTT por enlace)
 # ----------------------------
 def ping_avg_ms(container, iface, dst_ip, count=3, deadline=2):
-    # ping -q imprime apenas o sumário final, de onde extraímos avg RTT
     rc, out, err = docker_exec(
         container,
         ["ping", "-n", "-q", "-I", iface, "-c", str(count), "-w", str(deadline), dst_ip],
     )
-    if rc != 0:
-        return None
-    m = PING_AVG_RE.search(out)
+    text = out + "\n" + err
+    m = PING_AVG_RE.search(text)
     return float(m.group(1)) if m else None
 
 # ----------------------------

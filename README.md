@@ -7,16 +7,16 @@ Este repositório contém um laboratório de rede (Containerlab + Docker) com **
 
 > Ambiente recomendado: Ubuntu com Docker e Containerlab instalados.
 
-# Tópicos
-- [⚙️ Instalação de ferramentas](#️-instalação-de-ferramentas)
-- [Estrutura do projeto](#estrutura-do-projeto)
-- [Topologia](#topologia)
-- [Endereçamento](#endereçamento-resumo)
-- [Como subir e derrubar a rede](#como-subir-e-derrubar-a-rede)
-- [STTP — Shortest Trip Time Protocol](#sttp--shortest-trip-time-protocol)
-- [Troubleshooting](#observações-importantes--troubleshooting)
+## Tópicos
+- [⚙️ Instalação de ferramentas](#instalacao-de-ferramentas)
+- [📁 Estrutura do projeto](#estrutura-do-projeto)
+- [🌐 Topologia](#topologia)
+- [🔢 Endereçamento (resumo)](#enderecamento-resumo)
+- [🚀 Como subir e derrubar a rede](#como-subir-e-derrubar-a-rede)
+- [⏱️ STTP — Shortest Trip Time Protocol](#sttp-shortest-trip-time-protocol)
+- [🛠️ Observações importantes / Troubleshooting](#observacoes-importantes-troubleshooting)
 
-# ⚙️ Instalação de ferramentas
+## ⚙️ Instalação de ferramentas <a id="instalacao-de-ferramentas"></a>
 
 - Docker: https://docs.docker.com/
 - Containerlab: https://containerlab.dev/
@@ -32,7 +32,7 @@ clab version
 
 ---
 
-## Estrutura do projeto
+## 📁 Estrutura do projeto <a id="estrutura-do-projeto"></a>
 
 ```text
 .
@@ -85,7 +85,7 @@ clab version
 
 ---
 
-## Topologia
+## 🌐 Topologia <a id="topologia"></a>
 
 ### Conexões entre roteadores
 
@@ -106,7 +106,7 @@ clab version
 
 ---
 
-## Endereçamento (resumo)
+## 🔢 Endereçamento (resumo) <a id="enderecamento-resumo"></a>
 
 ### Links roteador↔roteador (/30)
 
@@ -131,7 +131,7 @@ clab version
 
 ---
 
-## Como subir e derrubar a rede
+## 🚀 Como subir e derrubar a rede <a id="como-subir-e-derrubar-a-rede"></a>
 
 > ***Execute apenas um lab por vez (RIP ou OSPF ou STTP).***
 
@@ -184,7 +184,7 @@ sudo clab destroy -t topologies/topology-ospf.clab.yml
 
 ---
 
-## STTP — Shortest Trip Time Protocol
+## ⏱️ STTP — Shortest Trip Time Protocol <a id="sttp-shortest-trip-time-protocol"></a>
 
 O STTP é um controlador de roteamento centralizado (roda fora dos roteadores, com visão de toda a topologia) que:
 
@@ -326,7 +326,7 @@ sudo clab destroy -t topologies/topology-sttp.clab.yml
 
 ---
 
-## Observações importantes / Troubleshooting
+## 🛠️ Observações importantes / Troubleshooting <a id="observacoes-importantes-troubleshooting"></a>
 
 ### Limpeza (resíduos de labs anteriores)
 

@@ -87,6 +87,8 @@ clab version
 
 ## 🌐 Topologia <a id="topologia"></a>
 
+![Alt](./topology.png)
+
 ### Conexões entre roteadores
 
 - R1–R2

@@ -1,5 +1,9 @@
 # Containerlab + FRR — Laboratório de Roteamento (RIP, OSPF e STTP)
 
+## Eduarda Machado Maciel & João Guilherme Borges Fernandes
+
+[Link dos vídeos de execução](https://drive.google.com/drive/folders/1guR3c4tUOjgS1ZG9AKVgGu5mjKrshdFR?usp=sharing)
+
 Este repositório contém um laboratório de rede (Containerlab + Docker) com **5 roteadores (FRRouting/FRR)** e **5 hosts**, pronto para:
 
 - configurar e comparar **RIPv2** e **OSPFv2** na mesma topologia (**executados separadamente**);

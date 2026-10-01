@@ -3,6 +3,8 @@ clab-*/
 *.pcapng
 *.log
 *.pkt
+*.mp4
+/videos
 
 *.pcapng
 results/**/pcaps/
